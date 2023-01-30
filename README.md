@@ -1,1 +1,1 @@
-# [dituon.github.io](https://dituon.github.io)
+# [d2n.moe](https://d2n.moe)

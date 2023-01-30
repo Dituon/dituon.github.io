@@ -96,32 +96,32 @@
         }
 
         .top {
-            background-color: #fff;
+            background-color: #00000000;
             transform: rotateX(90deg) translateZ(calc(var(--size) * .5));
         }
 
         .bottom {
-            background-color: #999;
+            background-color: #00000088;
             transform: rotateX(90deg) translateZ(calc(var(--size) * -.5));
         }
 
         .left {
-            background-color: #ccc;
+            background-color: #00000055;
             transform: rotateY(90deg) translateZ(calc(var(--size) * .5));
         }
 
         .right {
-            background-color: #ddd;
+            background-color: #00000044;
             transform: rotateY(90deg) translateZ(calc(var(--size) * -.5));
         }
 
         .front {
-            background-color: #aaa;
+            background-color: #00000077;
             transform: translateZ(calc(var(--size) * .5));
         }
 
         .back {
-            background-color: #bbb;
+            background-color: #00000066;
             transform: translateZ(calc(var(--size) * -.5));
         }
 
@@ -133,20 +133,42 @@
         }
     </style>
     <style>
-        .info {
+        :root {
+            --head-height: 100vh;
+        }
+
+        .head {
             width: 100%;
+            height: var(--head-height);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             text-align: center;
+            scroll-snap-align: end;
+        }
+
+        .start {
+            width: 100%;
+            height: calc(500vh * 0.6 - var(--head-height));
+            scroll-snap-align: end;
+        }
+
+        .frame {
+            width: 100%;
+            height: 200vh;
+            scroll-snap-align: start;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
         }
     </style>
 </head>
 
 <body>
     <div class="progress"></div>
-    <div class="info">
+    <div class="head">
         <h1>Dituon</h1>
         <a href="https://github.com/Dituon">Github</a>
         <a href="mailto:me@d2n.moe">邮箱</a>
@@ -162,6 +184,8 @@
             <a href="https://github.com/Dituon/dituon.github.io">此网站在Github上开源</a>
         </small>
     </div>
+    <div class="start"></div>
+    <div class="frame"></div>
 
     <div class="cube-wrap">
         <div class="cube">

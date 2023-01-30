@@ -1,14 +1,139 @@
+<!DOCTYPE html>
 <html lang="zh">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://avatars.githubusercontent.com/u/68615161?s=64&v=4" type="image/x-icon" />
-    <title>Dituon!</title>
+    <title>Document</title>
     <style>
         body {
-            height: 90vh;
+            padding: 0;
+            margin: 0;
+            min-height: 500vh;
+            background-color: #fff;
+            animation: body 1s linear;
+        }
+
+        @keyframes body {
+            to {
+                background-color: #db639b;
+            }
+        }
+
+        .progress {
+            height: 3px;
+            width: 0%;
+            background-color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            animation: progress 1s linear;
+        }
+
+        @keyframes progress {
+            to {
+                background-color: rgb(20, 255, 226);
+                width: 100%;
+            }
+        }
+
+        .cube-wrap {
+            --size: 30vmin;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            perspective: 100vmin;
+        }
+
+        .cube {
+            transform-style: preserve-3d;
+            transform: rotateX(0deg) rotateZ(45deg) rotateY(-45deg);
+            animation: cube 1s linear;
+        }
+
+        @keyframes cube {
+            to {
+                transform: rotateX(360deg) rotateZ(45deg) rotateY(-45deg);
+            }
+        }
+
+        .side {
+            position: absolute;
+            width: var(--size);
+            height: var(--size);
+            background-image: url(./stickers/cobblestone.png);
+            background-color: #eee;
+            background-size: 100%;
+            image-rendering: pixelated;
+
+            background-blend-mode: multiply;
+            backface-visibility: visible;
+            top: calc(var(--size) * -.5);
+            left: calc(var(--size) * -.5);
+
+            animation: side-opacity linear 0.5s;
+            transform: scale(0);
+        }
+
+        @keyframes side-opacity {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.2;
+            }
+
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .top {
+            background-color: #fff;
+            transform: rotateX(90deg) translateZ(calc(var(--size) * .5));
+        }
+
+        .bottom {
+            background-color: #999;
+            transform: rotateX(90deg) translateZ(calc(var(--size) * -.5));
+        }
+
+        .left {
+            background-color: #ccc;
+            transform: rotateY(90deg) translateZ(calc(var(--size) * .5));
+        }
+
+        .right {
+            background-color: #ddd;
+            transform: rotateY(90deg) translateZ(calc(var(--size) * -.5));
+        }
+
+        .front {
+            background-color: #aaa;
+            transform: translateZ(calc(var(--size) * .5));
+        }
+
+        .back {
+            background-color: #bbb;
+            transform: translateZ(calc(var(--size) * -.5));
+        }
+
+        :root * {
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll) * -1s);
+            animation-iteration-count: 1;
+            animation-fill-mode: both;
+        }
+    </style>
+    <style>
+        .info {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -18,18 +143,329 @@
 </head>
 
 <body>
-    <h1>Dituon</h1>
-    <a href="https://github.com/Dituon">Github</a>
-    <a href="mailto:me@d2n.moe">邮箱</a>
-    <a href="https://jq.qq.com/?_wv=1027&k=E2uTe8ga">你群</a>
-    <br />
-    <small>
-        <s>
-            让你感受到互联网诞生之初的浏览体验, 我称之为:
-            <b>赛博古典主义</b>
-            <sup>Cyber Classicalism</sup>
-        </s>
-    </small>
+    <div class="progress"></div>
+    <div class="info">
+        <h1>Dituon</h1>
+        <a href="https://github.com/Dituon">Github</a>
+        <a href="mailto:me@d2n.moe">邮箱</a>
+        <a href="https://jq.qq.com/?_wv=1027&k=E2uTe8ga">你群</a>
+        <br />
+        <small>
+            <s>
+                让你感受到互联网诞生之初的浏览体验, 我称之为:
+                <b>赛博古典主义</b>
+                <sup>Cyber Classicalism</sup>
+            </s>
+        </small>
+    </div>
+
+    <div class="cube-wrap">
+        <div class="cube">
+            <div class="side top"></div>
+            <div class="side bottom"></div>
+            <div class="side front"></div>
+            <div class="side back"></div>
+            <div class="side left"></div>
+            <div class="side right"></div>
+        </div>
+    </div>
+
+    <script>
+        const scrollFun = () => {
+            document.body.style.setProperty('--scroll', window.pageYOffset / (document.body.offsetHeight - window.innerHeight))
+        }
+        window.addEventListener('scroll', scrollFun, false)
+
+        const stickers = [
+            "acacia_leaves",
+            "acacia_log",
+            "acacia_planks",
+            "amethyst_block",
+            "andesite",
+            "anvil",
+            "azalea_leaves",
+            "beacon",
+            "bedrock",
+            "birch_leaves",
+            "birch_log",
+            "birch_planks",
+            "blackstone",
+            "black_concrete",
+            "black_concrete_powder",
+            "black_glazed_terracotta",
+            "black_shulker_box",
+            "black_terracotta",
+            "black_wool",
+            "blue_concrete",
+            "blue_concrete_powder",
+            "blue_glazed_terracotta",
+            "blue_ice",
+            "blue_shulker_box",
+            "blue_terracotta",
+            "blue_wool",
+            "bookshelf",
+            "brain_coral_block",
+            "bricks",
+            "brown_concrete",
+            "brown_concrete_powder",
+            "brown_glazed_terracotta",
+            "brown_mushroom_block",
+            "brown_shulker_box",
+            "brown_terracotta",
+            "brown_wool",
+            "bubble_coral_block",
+            "budding_amethyst",
+            "calcite",
+            "carved_pumpkin",
+            "chiseled_deepslate",
+            "chiseled_nether_bricks",
+            "chiseled_polished_blackstone",
+            "chiseled_quartz_block",
+            "chiseled_red_sandstone",
+            "chiseled_sandstone",
+            "chiseled_stone_bricks",
+            "clay",
+            "coal_block",
+            "coal_ore",
+            "coarse_dirt",
+            "cobbled_deepslate",
+            "cobblestone",
+            "copper_block",
+            "copper_ore",
+            "cracked_deepslate_bricks",
+            "cracked_deepslate_tiles",
+            "cracked_nether_bricks",
+            "cracked_polished_blackstone_bricks",
+            "cracked_stone_bricks",
+            "crimson_nylium",
+            "crimson_planks",
+            "crimson_stem",
+            "crying_obsidian",
+            "cut_copper",
+            "cut_red_sandstone",
+            "cut_sandstone",
+            "cyan_concrete",
+            "cyan_concrete_powder",
+            "cyan_glazed_terracotta",
+            "cyan_shulker_box",
+            "cyan_terracotta",
+            "cyan_wool",
+            "dark_oak_leaves",
+            "dark_oak_log",
+            "dark_oak_planks",
+            "dark_prismarine",
+            "dead_brain_coral_block",
+            "dead_bubble_coral_block",
+            "dead_fire_coral_block",
+            "dead_horn_coral_block",
+            "dead_tube_coral_block",
+            "deepslate",
+            "deepslate_bricks",
+            "deepslate_coal_ore",
+            "deepslate_copper_ore",
+            "deepslate_diamond_ore",
+            "deepslate_emerald_ore",
+            "deepslate_gold_ore",
+            "deepslate_iron_ore",
+            "deepslate_lapis_ore",
+            "deepslate_redstone_ore",
+            "deepslate_tiles",
+            "diamond_block",
+            "diamond_ore",
+            "diorite",
+            "dirt",
+            "dragon_egg",
+            "dripstone_block",
+            "emerald_block",
+            "emerald_ore",
+            "end_stone",
+            "end_stone_bricks",
+            "exposed_copper",
+            "exposed_cut_copper",
+            "farmland",
+            "fire_coral_block",
+            "flowering_azalea_leaves",
+            "gilded_blackstone",
+            "glowstone",
+            "gold_block",
+            "gold_ore",
+            "granite",
+            "gravel",
+            "gray_concrete",
+            "gray_concrete_powder",
+            "gray_glazed_terracotta",
+            "gray_shulker_box",
+            "gray_terracotta",
+            "gray_wool",
+            "green_concrete",
+            "green_concrete_powder",
+            "green_glazed_terracotta",
+            "green_shulker_box",
+            "green_terracotta",
+            "green_wool",
+            "honeycomb_block",
+            "horn_coral_block",
+            "ice",
+            "iron_block",
+            "iron_ore",
+            "jack_o_lantern",
+            "jungle_leaves",
+            "jungle_log",
+            "jungle_planks",
+            "lapis_block",
+            "lapis_ore",
+            "light_blue_concrete",
+            "light_blue_concrete_powder",
+            "light_blue_glazed_terracotta",
+            "light_blue_shulker_box",
+            "light_blue_terracotta",
+            "light_blue_wool",
+            "light_gray_concrete",
+            "light_gray_concrete_powder",
+            "light_gray_glazed_terracotta",
+            "light_gray_shulker_box",
+            "light_gray_terracotta",
+            "light_gray_wool",
+            "lime_concrete",
+            "lime_concrete_powder",
+            "lime_glazed_terracotta",
+            "lime_shulker_box",
+            "lime_terracotta",
+            "lime_wool",
+            "magenta_concrete",
+            "magenta_concrete_powder",
+            "magenta_glazed_terracotta",
+            "magenta_shulker_box",
+            "magenta_terracotta",
+            "magenta_wool",
+            "mangrove_leaves",
+            "mangrove_log",
+            "mangrove_planks",
+            "mossy_cobblestone",
+            "mossy_stone_bricks",
+            "moss_block",
+            "mud",
+            "mud_bricks",
+            "mushroom_stem",
+            "netherite_block",
+            "netherrack",
+            "nether_bricks",
+            "nether_gold_ore",
+            "nether_quartz_ore",
+            "nether_wart_block",
+            "note_block",
+            "oak_leaves",
+            "oak_log",
+            "oak_planks",
+            "obsidian",
+            "orange_concrete",
+            "orange_concrete_powder",
+            "orange_glazed_terracotta",
+            "orange_shulker_box",
+            "orange_terracotta",
+            "orange_wool",
+            "oxidized_copper",
+            "oxidized_cut_copper",
+            "packed_ice",
+            "packed_mud",
+            "pink_concrete",
+            "pink_concrete_powder",
+            "pink_glazed_terracotta",
+            "pink_shulker_box",
+            "pink_terracotta",
+            "pink_wool",
+            "polished_andesite",
+            "polished_blackstone",
+            "polished_blackstone_bricks",
+            "polished_deepslate",
+            "polished_diorite",
+            "polished_granite",
+            "prismarine",
+            "prismarine_bricks",
+            "purple_concrete",
+            "purple_concrete_powder",
+            "purple_glazed_terracotta",
+            "purple_shulker_box",
+            "purple_terracotta",
+            "purple_wool",
+            "purpur_block",
+            "purpur_pillar",
+            "quartz_bricks",
+            "quartz_pillar",
+            "raw_copper_block",
+            "raw_gold_block",
+            "raw_iron_block",
+            "redstone_block",
+            "redstone_lamp",
+            "redstone_ore",
+            "red_concrete",
+            "red_concrete_powder",
+            "red_glazed_terracotta",
+            "red_mushroom_block",
+            "red_nether_bricks",
+            "red_sand",
+            "red_sandstone",
+            "red_shulker_box",
+            "red_terracotta",
+            "red_wool",
+            "rooted_dirt",
+            "sand",
+            "sandstone",
+            "sculk",
+            "sculk_vein",
+            "sea_lantern",
+            "shroomlight",
+            "shulker_box",
+            "slime_block",
+            "smooth_basalt",
+            "smooth_stone",
+            "soul_sand",
+            "soul_soil",
+            "spawner",
+            "sponge",
+            "spruce_leaves",
+            "spruce_log",
+            "spruce_planks",
+            "stone",
+            "stone_bricks",
+            "stripped_acacia_log",
+            "stripped_birch_log",
+            "stripped_crimson_stem",
+            "stripped_dark_oak_log",
+            "stripped_jungle_log",
+            "stripped_mangrove_log",
+            "stripped_oak_log",
+            "stripped_spruce_log",
+            "stripped_warped_stem",
+            "structure_block",
+            "terracotta",
+            "tube_coral_block",
+            "tuff",
+            "warped_nylium",
+            "warped_planks",
+            "warped_stem",
+            "warped_wart_block",
+            "weathered_copper",
+            "weathered_cut_copper",
+            "wet_sponge",
+            "white_concrete",
+            "white_concrete_powder",
+            "white_glazed_terracotta",
+            "white_shulker_box",
+            "white_terracotta",
+            "white_wool",
+            "yellow_concrete",
+            "yellow_concrete_powder",
+            "yellow_glazed_terracotta",
+            "yellow_shulker_box",
+            "yellow_terracotta",
+            "yellow_wool"
+        ]
+        const sticker = stickers[Math.floor(Math.random() * stickers.length)]
+
+        cssRule = [...document.styleSheets.item(0).cssRules].find(c => c.selectorText === '.side')
+        cssRule.style.backgroundImage = `url(./stickers/${sticker}.png)`
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,7 @@
+.head:hover {
+    --transform-scale: 1;
+}
+
+.head:hover>#title {
+    letter-spacing: 0.18em;
+}

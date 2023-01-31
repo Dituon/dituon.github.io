@@ -1,0 +1,125 @@
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 500vh;
+    background-color: #fff;
+    animation: body 1s linear;
+
+    --sticker-url: url(/stickers/cobblestone.png);
+}
+
+@keyframes body {
+    to {
+        background-color: #db639b;
+    }
+}
+
+.progress {
+    height: 3px;
+    width: 0%;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    animation: progress 1s linear;
+}
+
+@keyframes progress {
+    to {
+        background-color: #15ffe9;
+        width: 100%;
+    }
+}
+
+.cube-wrap {
+    --size: 30vmin;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    perspective: 100vmin;
+}
+
+.cube {
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateZ(45deg) rotateY(-45deg);
+    animation: cube 1s linear;
+}
+
+@keyframes cube {
+    to {
+        transform: rotateX(360deg) rotateZ(45deg) rotateY(-45deg);
+    }
+}
+
+.side {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    background-image: var(--sticker-url);
+    background-color: #eee;
+    background-size: 100%;
+    image-rendering: pixelated;
+
+    background-blend-mode: multiply;
+    backface-visibility: visible;
+    top: calc(var(--size) * -.5);
+    left: calc(var(--size) * -.5);
+
+    animation: side-opacity linear 0.5s;
+    transform: scale(0);
+}
+
+@keyframes side-opacity {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.2;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.top {
+    background-color: #00000000;
+    transform: rotateX(90deg) translateZ(calc(var(--size) * .5));
+}
+
+.bottom {
+    background-color: #00000088;
+    transform: rotateX(90deg) translateZ(calc(var(--size) * -.5));
+}
+
+.left {
+    background-color: #00000055;
+    transform: rotateY(90deg) translateZ(calc(var(--size) * .5));
+}
+
+.right {
+    background-color: #00000044;
+    transform: rotateY(90deg) translateZ(calc(var(--size) * -.5));
+}
+
+.front {
+    background-color: #00000077;
+    transform: translateZ(calc(var(--size) * .5));
+}
+
+.back {
+    background-color: #00000066;
+    transform: translateZ(calc(var(--size) * -.5));
+}
+
+:root * {
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}

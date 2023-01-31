@@ -1,0 +1,38 @@
+:root {
+    --head-height: 100vh;
+}
+
+.head {
+    width: 100%;
+    height: var(--head-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    scroll-snap-align: start;
+}
+
+.start {
+    width: 100%;
+    height: calc(500vh * 0.6 - var(--head-height));
+    scroll-snap-align: end;
+
+    display: var(--flag);
+}
+
+.frame {
+    width: 100%;
+    height: 200vh;
+    scroll-snap-align: start;
+
+    display: var(--flag);
+}
+
+html {
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    --flag: block;
+}

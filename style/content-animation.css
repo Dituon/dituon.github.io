@@ -1,0 +1,56 @@
+:root,
+:before {
+    --background: linear-gradient(93deg, #f35a2c, #ffab35);
+}
+
+.head {
+    position: relative;
+    overflow: hidden;
+
+    --transform-scale: 0;
+}
+
+
+.head::before {
+    --size: max(400vw, 400vh);
+
+    content: "";
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+
+    transition: transform 1s ease-in-out;
+    transform: scale(var(--transform-scale));
+    /* translate(-50%, -50%); */
+    background: var(--background);
+    animation: title 8s linear infinite;
+
+    /* top: 0;
+    left: 0; */
+}
+
+.head>#title {
+    transition: all 0.8s 0.2s;
+    background: var(--background);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: #ffffff88;
+    letter-spacing: 0.12em;
+
+    margin: 0.6rem 0;
+    font-size: 6em;
+    animation: title 8s linear infinite;
+
+    mix-blend-mode: normal;
+}
+
+@keyframes title {
+    from {
+        filter: hue-rotate(0deg);
+    }
+
+    to {
+        filter: hue-rotate(-360deg);
+    }
+}
